@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KisanDirect - Farm Fresh Directly to You</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background-color: #f6f1e6;
+            color: #333;
+        }
+        
+        .header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar {
+            background-color: #1b5e20;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        
+        .user-actions a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo img {
+            height: 50px;
+        }
+        
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .main-nav li {
+            margin-left: 30px;
+        }
+        
+        .main-nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .main-nav a:hover {
+            color: #2d9534;
+        }
+        
+        .cart-icon {
+            position: relative;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #ff5722;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+        }
+        
+        .hero {
+            background-image: url('farmer2.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 600px;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #1b5e20;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2e7d32;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-left: 15px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .features {
+            padding: 70px 0;
+            background-color: #fff;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            color: #1b5e20;
+            margin-bottom: 50px;
+        }
+        
+        .features-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        
+        .feature {
+            flex: 1;
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .feature p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .categories {
+            padding: 70px 0;
+        }
+        
+        .categories-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .category {
+            position: relative;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .category img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .category:hover img {
+            transform: scale(1.1);
+        }
+        
+        .category-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(27, 94, 32, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .category:hover .category-overlay {
+            background: rgba(27, 94, 32, 0.8);
+        }
+        
+        .category h3 {
+            color: white;
+            font-size: 22px;
+            text-align: center;
+        }
+        
+        .featured-products {
+            padding: 70px 0;
+            background-color: #fff;
+        }
+        
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-category {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .product-price {
+            font-size: 16px;
+            color: #1b5e20;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .add-to-cart {
+            background-color: #1b5e20;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            font-size: 14px;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #2e7d32;
+        }
+        
+        .testimonials {
+            padding: 70px 0;
+        }
+        
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial {
+            text-align: center;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #444;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 5px;
+        }
+        
+        .testimonial-role {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .footer {
+            background-color: #1b5e20;
+            color: white;
+            padding: 70px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #4caf50;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+        }
+        
+        .team-info {
+            margin-top: 10px;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="contact-info">
+                    <a href="tel:+919876543210">+91 98765 43210</a>
+                    <a href="mailto:support@kisandirect.com">support@kisandirect.com</a>
+                </div>
+                <div class="user-actions">
+                    <a href="login.html">Login</a>
+                    <a href="register.html">Register</a>
+                </div>
+            </div>
+        </div>
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="logo_kisandirect.png" alt="KisanDirect Logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="vegetables.html">Vegetables</a></li>
+                    <li><a href="fruits.html">Fruits</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="cart-icon">
+                        <a href="cart.html">Cart</a>
+                        <span class="cart-count">0</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Fresh Farm Produce Directly From Farmers</h1>
+            <p>Experience the freshness of farm-to-table vegetables and fruits. Support local farmers and get the best quality produce at fair prices.</p>
+            <div class="hero-buttons">
+                <a href="vegetables.html" class="btn">Shop Now</a>
+                <a href="about.html" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose KisanDirect?</h2>
+            <div class="features-container">
+                <div class="feature">
+                    <img src="farm.jpg" alt="Fresh Produce">
+                    <h3>Farm Fresh</h3>
+                    <p>Vegetables and fruits harvested and delivered on the same day for maximum freshness.</p>
+                </div>
+                <div class="feature">
+                    <img src="img2.jpg" alt="Support Farmers">
+                    <h3>Support Local Farmers</h3>
+                    <p>Direct from farmer to consumer means better income for farmers and better prices for you.</p>
+                </div>
+                <div class="feature">
+                    <img src="img3.jpg" alt="Organic">
+                    <h3>Organic Options</h3>
+                    <p>Wide range of naturally grown and organic produce options for health-conscious consumers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Shop By Category</h2>
+            <div class="categories-container">
+                <a href="vegetables.html" class="category">
+                    <img src="vegetable.jpg" alt="Vegetables">
+                    <div class="category-overlay">
+                        <h3>Vegetables</h3>
+                    </div>
+                </a>
+                <a href="fruits.html" class="category">
+                    <img src="fruits.jpg" alt="Fruits">
+                    <div class="category-overlay">
+                        <h3>Fruits</h3>
+                    </div>
+                </a>
+                <a href="organic.html" class="category">
+                    <img src="organic_farming.jpg" alt="Organic">
+                    <div class="category-overlay">
+                        <h3>Organic Collection</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-products">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="products-container">
+                <div class="product" data-id="1">
+                    <div class="product-image">
+                        <img src="tomato.jpg" alt="Tomatoes">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Vegetables</div>
+                        <h3 class="product-title">Fresh Tomatoes</h3>
+                        <div class="product-price">₹40 / kg</div>
+                        <button class="add-to-cart" onclick="addToCart(1)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product" data-id="3">
+                    <div class="product-image">
+                        <img src="potatoes.avif" alt="Potatoes">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Vegetables</div>
+                        <h3 class="product-title">Organic Potatoes</h3>
+                        <div class="product-price">₹30 / kg</div>
+                        <button class="add-to-cart" onclick="addToCart(3)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product" data-id="2">
+                    <div class="product-image">
+                        <img src="apples.avif" alt="Apples">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Fruits</div>
+                        <h3 class="product-title">Shimla Apples</h3>
+                        <div class="product-price">₹120 / kg</div>
+                        <button class="add-to-cart" onclick="addToCart(2)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product" data-id="4">
+                    <div class="product-image">
+                        <img src="banana.avif" alt="Bananas">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Fruits</div>
+                        <h3 class="product-title">Ripe Bananas</h3>
+                        <div class="product-price">₹60 / dozen</div>
+                        <button class="add-to-cart" onclick="addToCart(4)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonial-container">
+                <div class="testimonial">
+                    <p class="testimonial-text">"I've been ordering vegetables from KisanDirect for 3 months now. The quality is amazing and knowing that I'm supporting local farmers directly makes me feel good about my purchases."</p>
+                    <div class="testimonial-author">Priya Sharma</div>
+                    <div class="testimonial-role">Regular Customer</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>KisanDirect</h3>
+                    <p>Connecting farmers directly with customers for fresher produce and better prices.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="vegetables.html">Vegetables</a></li>
+                        <li><a href="fruits.html">Fruits</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Customer Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: support@kisandirect.com</p>
+                    <p>Phone: +91 98765 43210</p>
+                    <p>Address: 123 Farmer's Market, Agri Zone, New Delhi - 110001</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 KisanDirect. All rights reserved.</p>
+                <p class="team-info">Developed by Team KisanDirect: Rahul, Priya, Amit, and Neha</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple Cart Functionality
+        let cartCount = 0;
+        
+        function addToCart(productId) {
+            cartCount++;
+            updateCartCount();
+            alert('Product added to cart!');
+        }
+        
+        function updateCartCount() {
+            document.querySelector('.cart-count').textContent = cartCount;
+        }
+    </script>
+</body>
+</html>
